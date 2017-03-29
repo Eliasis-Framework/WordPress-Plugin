@@ -4,7 +4,7 @@
 
 [Spanish version](README-ES.md)
 
-![image](https://github.com/Eliasis-Framework/Eliasis/blob/master/resources/eliasis-wordpress-plugin.png)
+![image](https://github.com/Eliasis-Framework/WordPress-Plugin/blob/master/resources/eliasis-wordpress-plugin.png)
 
 ---
 
