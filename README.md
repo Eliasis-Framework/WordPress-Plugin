@@ -2,7 +2,7 @@
 
 [![Latest Stable Version](https://poser.pugx.org/eliasis-framework/wordpress-plugin/v/stable)](https://packagist.org/packages/eliasis-framework/wordpress-plugin) [![Total Downloads](https://poser.pugx.org/eliasis-framework/wordpress-plugin/downloads)](https://packagist.org/packages/eliasis-framework/wordpress-plugin) [![Latest Unstable Version](https://poser.pugx.org/eliasis-framework/wordpress-plugin/v/unstable)](https://packagist.org/packages/eliasis-framework/wordpress-plugin) [![License](https://poser.pugx.org/eliasis-framework/wordpress-plugin/license)](https://packagist.org/packages/eliasis-framework/wordpress-plugin)
 
-[Spanish version](README-ES.md)
+[Versión en español](README-ES.md)
 
 ![image](https://github.com/Eliasis-Framework/WordPress-Plugin/blob/master/resources/eliasis-wordpress-plugin.png)
 
