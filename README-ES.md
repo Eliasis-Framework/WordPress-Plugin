@@ -10,6 +10,7 @@
 
 - [Instalación](#instalación)
 - [Requisitos](#requisitos)
+- [Cómo empezar y ejemplos](#cómo-empezar-y-ejemplos)
 - [Contribuir](#contribuir)
 - [Licencia](#licencia)
 - [Copyright](#copyright)
@@ -35,6 +36,48 @@ También puedes clonar el repositorio completo con Git:
 ### Requisitos
 
 Este plugin es soportado por versiones de PHP 5.6 o superiores y es compatible con versiones de HHVM 3.0 o superiores.
+
+### Cómo empezar y ejemplos
+
+Para utilizar Eliasis PHP Framework en un plugin, simplemente:
+
+```php
+$DS = DIRECTORY_SEPARATOR;
+
+require dirname(__DIR__) . $DS . 'lib' . $DS . 'vendor' . $DS .'autoload.php';
+
+use Eliasis\App\App;
+
+App::run(dirname(__DIR__), 'wordpress-plugin', 'unique_id');
+
+/**
+ * El id único es utilizado para poder ejecutar Eliasis PHP Framework
+ * en varios plugins de WordPress sin que haya conflicto entre ellos.
+ *
+ * Indicamos a la clase App el plugin que está en uso de la siguiente manera:
+ * App::id('unique_id')
+ *
+ * Por ejemplo:
+ */
+
+# Plugin uno
+
+function getPublicPath() {
+	
+	App::id('plugin-uno-id');
+
+	return App::path('public');
+}
+
+# Plugin dos
+
+function getPublicPath() {
+	
+	App::id('plugin-dos-id');
+
+	return App::path('public');
+}
+```
 
 ### Contribuir
 1. Comprobar si hay incidencias abiertas o abrir una nueva para iniciar una discusión en torno a un fallo o función.
