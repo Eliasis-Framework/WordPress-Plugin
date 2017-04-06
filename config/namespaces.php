@@ -11,7 +11,7 @@
 
 return [
 
-    'getNamespace' => [
+    'namespace' => [
 
         'admin-page' => 'EliasisWordPress\\Controller\\Admin\\Page\\',
         'controller' => 'EliasisWordPress\\Controller\\',

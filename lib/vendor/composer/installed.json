@@ -230,19 +230,19 @@
         "source": {
             "type": "git",
             "url": "https://github.com/Eliasis-Framework/Eliasis.git",
-            "reference": "e69b75652e943377a9a01b15c5d79cb3dac7f48a"
+            "reference": "664108f24da2fe8eab8f10e5f7db94a63353ea36"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Eliasis-Framework/Eliasis/zipball/e69b75652e943377a9a01b15c5d79cb3dac7f48a",
-            "reference": "e69b75652e943377a9a01b15c5d79cb3dac7f48a",
+            "url": "https://api.github.com/repos/Eliasis-Framework/Eliasis/zipball/664108f24da2fe8eab8f10e5f7db94a63353ea36",
+            "reference": "664108f24da2fe8eab8f10e5f7db94a63353ea36",
             "shasum": ""
         },
         "require": {
             "josantonius/url": "^1.1.1",
             "php": "^5.6 || ^7.0"
         },
-        "time": "2017-04-06 17:06:43",
+        "time": "2017-04-06 19:05:37",
         "type": "library",
         "extra": {
             "branch-alias": {

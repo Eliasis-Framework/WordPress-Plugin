@@ -33,8 +33,6 @@ class Launcher extends Controller {
      */
     public function init() {
 
-        App::id(ELIASIS_WP);
-
         if (!isset($_REQUEST['plugin'])) { $_REQUEST['plugin'] = ''; }
 
         register_activation_hook(__FILE__, [$this, 'activation']);
@@ -164,7 +162,7 @@ class Launcher extends Controller {
 
         foreach (App::pages() as $page) {
 
-            $page = App::getNamespace('admin-page') . $page;
+            $page = App::namespace('admin-page') . $page;
 
             if (class_exists($page)) {
 

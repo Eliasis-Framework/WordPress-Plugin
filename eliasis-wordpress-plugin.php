@@ -24,15 +24,13 @@ if (!function_exists('add_action') || !defined('ABSPATH')) {
     echo 'I can do when called directly.'; die;
 }
 
-define('ELIASIS_WP', 'EliasisWordPress');
-
 $DS = DIRECTORY_SEPARATOR;
 
 require 'lib' . $DS . 'vendor' . $DS .'autoload.php';
 
-new App(__DIR__, 'wordpress-plugin', ELIASIS_WP);
+App::run(__DIR__, 'wordpress-plugin');
 
-$method = App::getNamespace('controller') . 'Launcher::getInstance';
+$method = App::namespace('controller') . 'Launcher::getInstance';
 
 $Launcher = call_user_func($method);
 
