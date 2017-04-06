@@ -62,6 +62,8 @@ App::run(dirname(__DIR__), 'wordpress-plugin', 'unique_id');
 
 # Plugin uno
 
+App::run(dirname(__DIR__), 'wordpress-plugin', 'plugin-uno-id');
+
 function getPublicPath() {
 	
 	App::id('plugin-uno-id');
@@ -70,6 +72,8 @@ function getPublicPath() {
 }
 
 # Plugin dos
+
+App::run(dirname(__DIR__), 'wordpress-plugin', 'plugin-dos-id');
 
 function getPublicPath() {
 	
