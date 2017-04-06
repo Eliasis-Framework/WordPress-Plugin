@@ -40,6 +40,8 @@ class Options extends Controller {
      */
     public function init() {
 
+        App::id(ELIASIS_WP);
+
         $this->addScripts();
         $this->addStyles();
         $this->getSettings();
@@ -135,6 +137,8 @@ class Options extends Controller {
      * @since 1.0.0
      */
     public function render() {
+
+        App::id(ELIASIS_WP);
 
         $this->view->renderizate(App::path('layout') . 'default');
     }

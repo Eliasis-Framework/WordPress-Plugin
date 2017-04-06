@@ -26,9 +26,11 @@ if (!function_exists('add_action') || !defined('ABSPATH')) {
 
 $DS = DIRECTORY_SEPARATOR;
 
+define('ELIASIS_WP', 'EliasisWordPress');
+
 require 'lib' . $DS . 'vendor' . $DS .'autoload.php';
 
-App::run(__DIR__, 'wordpress-plugin');
+App::run(__DIR__, 'wordpress-plugin', ELIASIS_WP);
 
 $method = App::namespace('controller') . 'Launcher::getInstance';
 
