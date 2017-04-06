@@ -2,7 +2,7 @@
 /**
  * Eliasis PHP Framework
  *
- * @author     Josantonius - hola@josantonius.com
+ * @author     Josantonius - hello@josantonius.com
  * @copyright  Copyright (c) 2017
  * @license    https://opensource.org/licenses/MIT - The MIT License (MIT)
  * @link       https://github.com/Eliasis-Framework/Eliasis
@@ -21,6 +21,15 @@ use Josantonius\Url\Url;
 class App {
 
     /**
+     * Unique id for the application.
+     *
+     * @since 1.0.0
+     *
+     * @var object
+     */
+    public static $id;
+
+    /**
      * Framework settings.
      *
      * @since 1.0.0
@@ -28,15 +37,6 @@ class App {
      * @var array
      */
     protected static $settings = [];
-
-    /**
-     * Application type.
-     *
-     * @since 1.0.0
-     *
-     * @var string
-     */
-    protected static $type;
 
     /**
      * Set directory separator constant.
@@ -50,22 +50,23 @@ class App {
     /**
      * Initializer.
      *
-     * @param string $baseDirectory → directory where class is instantiated.
-     * @param string $type → application type
-     *
      * @since 1.0.0
+     *
+     * @param string $baseDirectory → directory where class is instantiated
+     * @param string $type          → application type
+     * @param string $id            → unique id for the application
      */
-    public function __construct($baseDirectory, $type = 'app') {
+    public function __construct($baseDirectory, $type = 'app', $id = '0') {
 
-        self::$type = $type;
+        self::$id = $id;
+
+        $this->_setPaths($baseDirectory);
+
+        $this->_setUrls($baseDirectory, $type);
 
         $this->_runErrorHandler();
 
         $this->_runCleaner();
-
-        $this->_setPaths($baseDirectory);
-
-        $this->_setUrls($baseDirectory);
 
         $this->_getSettings();
 
@@ -81,7 +82,7 @@ class App {
      *
      * @since 1.0.1
      */
-    private static function _runErrorHandler() {
+    private function _runErrorHandler() {
 
         if (class_exists($class='Josantonius\\ErrorHandler\\ErrorHandler')) {
 
@@ -94,7 +95,7 @@ class App {
      *
      * @since 1.0.1
      */
-    private static function _runCleaner() {
+    private function _runCleaner() {
 
         if (class_exists($Cleaner = 'Josantonius\\Cleaner\\Cleaner')) {
 
@@ -106,9 +107,9 @@ class App {
     /**
      * Set application paths.
      *
-     * @param string $baseDirectory → directory where class is instantiated
-     *
      * @since 1.0.1
+     *
+     * @param string $baseDirectory → directory where class is instantiated
      */
     private function _setPaths($baseDirectory) {
 
@@ -121,13 +122,14 @@ class App {
     /**
      * Set url depending where the framework is launched.
      *
-     * @param string $baseDirectory → directory where class is instantiated
-     *
      * @since 1.0.1
+     *
+     * @param string $baseDirectory → directory where class is instantiated
+     * @param string $type          → application type
      */
-    private function _setUrls($baseDirectory) {
+    private function _setUrls($baseDirectory, $type) {
 
-        switch (self::$type) {
+        switch ($type) {
 
             case 'wordpress-plugin':
                 $baseUrl = plugins_url(basename($baseDirectory)) . App::DS;
@@ -155,6 +157,8 @@ class App {
             App::ROOT() . 'config' . App::DS,
         ];
 
+        $id = self::$id;
+
         foreach ($path as $dir) {
 
             if (is_dir($dir) && $handle = scandir($dir)) {
@@ -165,7 +169,11 @@ class App {
 
                     $config = require($dir . $file);
 
-                    self::$settings = array_merge(self::$settings, $config);
+                    self::$settings[$id] = array_merge(
+
+                        self::$settings[$id], 
+                        $config
+                    );
                 }
             }
         }         
@@ -176,7 +184,7 @@ class App {
      *
      * @since 1.0.1
      */
-    private static function _runHooks() {
+    private function _runHooks() {
 
         if (class_exists($Hook = 'Josantonius\\Hook\\Hook')) {
 
@@ -189,7 +197,7 @@ class App {
      *
      * @since 1.0.1
      */
-    private static function _runModules() {
+    private function _runModules() {
 
         $Module = 'Eliasis\\Module\\Module';
 
@@ -201,15 +209,17 @@ class App {
      *
      * @since 1.0.1
      */
-    private static function _runRoutes() {
+    private function _runRoutes() {
+
+        $id = self::$id;
 
         if (class_exists($Router = 'Josantonius\\Router\\Router')) {
 
-            if (isset(self::$settings['routes'])) {
+            if (isset(self::$settings[$id]['routes'])) {
 
-                $Router::addRoute(self::$settings['routes']);
+                $Router::addRoute(self::$settings[$id]['routes']);
 
-                unset(self::$settings['routes']);
+                unset(self::$settings[$id]['routes']);
 
                 $Router::dispatch();
             }
@@ -219,6 +229,8 @@ class App {
     /**
      * Define new configuration settings.
      *
+     * @since 1.0.0
+     *
      * @param string $option → option name or options array
      * @param mixed  $value  → value/s
      *
@@ -226,21 +238,39 @@ class App {
      */
     public static function addOption($option, $value) {
 
+        $id = self::$id;
+
         if (is_array($value)) {
 
             foreach ($value as $key => $value) {
             
-                self::$settings[$option][$key] = $value;
+                self::$settings[$id][$option][$key] = $value;
             }
 
             return;
         }
 
-        self::$settings[$option] = $value;
+        self::$settings[$id][$option] = $value;
+    }
+
+    /**
+     * Define the application id.
+     *
+     * @since 1.0.1
+     *
+     * @param string $id → application id
+     *
+     * @return
+     */
+    public static function id($id) {
+
+        self::$id = $id;
     }
 
     /**
      * Access the configuration parameters.
+     *
+     * @since 1.0.0
      *
      * @param string $index
      * @param array  $params
@@ -249,7 +279,9 @@ class App {
      */
     public static function __callstatic($index, $params = []) {
 
-        $settings = self::$settings;
+        $id = self::$id;
+
+        $settings = self::$settings[$id];
 
         $column[] = (isset($settings[$index])) ? $settings[$index] : null;
 
