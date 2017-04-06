@@ -11,6 +11,7 @@
 
 namespace EliasisWordPress\Controller;
 
+use Eliasis\App\App;
 /**
  * Main method for cleaning and removal of components.
  * 
@@ -28,8 +29,10 @@ class Uninstall {
      */
     public static function removeAll() {
 
-        delete_option('eliasis-wordpress-plugin-version');
+        $pluginName = App::plugin('name');
+
+        delete_option($pluginName .'version');
         // For site options in Multisite
-        delete_site_option('eliasis-wordpress-plugin-version');
+        delete_site_option($pluginName . 'version');
     }
 }

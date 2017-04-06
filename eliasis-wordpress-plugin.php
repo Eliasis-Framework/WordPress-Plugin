@@ -32,9 +32,13 @@ require 'lib' . $DS . 'vendor' . $DS .'autoload.php';
 
 App::run(__DIR__, 'wordpress-plugin', ELIASIS_WP);
 
-$method = App::getNamespace('controller') . 'Launcher::getInstance';
+$method = App::namespace('controller') . 'Launcher::getInstance';
 
 $Launcher = call_user_func($method);
 
+register_activation_hook(__FILE__, [$Launcher, 'activation']);
+
+register_deactivation_hook(__FILE__, [$Launcher, 'deactivation']);
+        
 $Launcher->init();
 ?>
