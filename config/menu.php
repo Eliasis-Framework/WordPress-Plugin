@@ -11,7 +11,9 @@
 
 use Eliasis\App\App;
 
-$textdomain = App::plugin('name');
+$textdomain = App::EliasisWordPress('plugin', 'name');
+
+$iconsUrl = App::EliasisWordPress('url', 'icons');
 
 return [
 
@@ -22,7 +24,7 @@ return [
 			'capability' => 'manage_options',
 			'slug'       => 'eliasis-wp-options',
 			'function'   => '',
-			'icon_url'   => App::url('icons') . 'eliasis-wp-menu-admin.png',
+			'icon_url'   => $iconsUrl . 'eliasis-wp-menu-admin.png',
 			'position'   => 26,
 		],
 	],

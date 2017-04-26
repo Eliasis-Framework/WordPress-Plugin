@@ -55,7 +55,7 @@ App::run(dirname(__DIR__), 'wordpress-plugin', 'unique_id');
  * en varios plugins de WordPress sin que haya conflicto entre ellos.
  *
  * Indicamos a la clase App el plugin que está en uso de la siguiente manera:
- * App::id('unique_id')
+ * App::unique_id('namespace')
  *
  * Por ejemplo:
  */
@@ -66,9 +66,7 @@ App::run(dirname(__DIR__), 'wordpress-plugin', 'plugin-uno-id');
 
 function getPublicPath() {
 	
-	App::id('plugin-uno-id');
-
-	return App::path('public');
+	App::plugin-one-id('path', 'public');
 }
 
 # Plugin dos
@@ -77,9 +75,7 @@ App::run(dirname(__DIR__), 'wordpress-plugin', 'plugin-dos-id');
 
 function getPublicPath() {
 	
-	App::id('plugin-dos-id');
-
-	return App::path('public');
+	App::plugin-two-id('path', 'public');
 }
 ```
 

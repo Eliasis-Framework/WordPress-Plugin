@@ -77,9 +77,9 @@ class Launcher extends Controller {
      */
     protected function setVersion() {
 
-        $pluginName = App::plugin('name');
+        $pluginName = App::EliasisWordPress('plugin', 'name');
 
-        $actualVersion = App::plugin('version');
+        $actualVersion = App::EliasisWordPress('plugin', 'version');
 
         if (!$installed_version = get_option($pluginName) . '-version') {
 
@@ -116,10 +116,12 @@ class Launcher extends Controller {
      */
     public function setLanguage() {
 
+        $pluginName = App::EliasisWordPress('plugin', 'name');
+
         load_plugin_textdomain(
             'search-inside', 
             false, 
-            App::plugin('name') . App::DS . 'languages' . App::DS
+            $pluginName. App::DS . 'languages' . App::DS
         );
     }
 
@@ -130,7 +132,7 @@ class Launcher extends Controller {
      */
     protected function setHooks() {
 
-        Hook::setHook(App::hooks());
+        Hook::setHook(App::EliasisWordPress('hooks'));
     }
 
     /**
@@ -142,7 +144,7 @@ class Launcher extends Controller {
      */
     public function admin() {
 
-        WP_Menu::add('menu', App::menu('top-level'));
+        WP_Menu::add('menu', App::EliasisWordPress('menu', 'top-level'));
 
         add_action('plugins_loaded', array($this, 'getCurrentScreen'));
     }
@@ -158,11 +160,9 @@ class Launcher extends Controller {
      */
     public function getCurrentScreen() {
 
-        App::id(ELIASIS_WP);
+        foreach (App::EliasisWordPress('pages') as $page) {
 
-        foreach (App::pages() as $page) {
-
-            $page = App::namespace('admin-page') . $page;
+            $page = App::EliasisWordPress('namespace', 'admin-page') . $page;
 
             if (class_exists($page)) {
 
@@ -204,7 +204,10 @@ class Launcher extends Controller {
 
         foreach ($scripts as $script) {
 
-            WP_Register::add('script', App::assets('js', $script));
+            WP_Register::add(
+                'script', 
+                App::EliasisWordPress('assets', 'js', $script)
+            );
         }
     }
 
@@ -222,7 +225,10 @@ class Launcher extends Controller {
 
         foreach ($styles as $style) {
 
-            WP_Register::add('style',  App::assets('css', $style));
+            WP_Register::add(
+                'style',  
+                App::EliasisWordPress('assets', 'css', $style)
+            );
         }
     }
 }

@@ -11,8 +11,6 @@
 
 use Eliasis\App\App;
 
-App::id(ELIASIS_WP);
-
-require(App::path('elements') . 'header.php');
-require(App::path('pages')    . 'options.php');
-require(App::path('elements') . 'footer.php');
+require(App::EliasisWordPress('path', 'elements') . 'header.php');
+require(App::EliasisWordPress('path', 'pages')    . 'options.php');
+require(App::EliasisWordPress('path', 'elements') . 'footer.php');

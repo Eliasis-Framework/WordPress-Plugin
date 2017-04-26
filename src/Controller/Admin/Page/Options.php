@@ -40,8 +40,6 @@ class Options extends Controller {
      */
     public function init() {
 
-        App::id(ELIASIS_WP);
-
         $this->addScripts();
         $this->addStyles();
         $this->getSettings();
@@ -57,7 +55,11 @@ class Options extends Controller {
      */
     public function addSubmenuPage() {
 
-        WP_Menu::add('submenu', App::submenu('options'), [$this, 'render']);
+        WP_Menu::add(
+            'submenu', 
+            App::EliasisWordPress('submenu', 'options'), 
+            [$this, 'render']
+        );
     }
 
     /**
@@ -74,7 +76,10 @@ class Options extends Controller {
 
         foreach ($scripts as $script) {
 
-            WP_Register::add('script', App::assets('js', $script));
+            WP_Register::add(
+                'script', 
+                App::EliasisWordPress('assets', 'js', $script)
+            );
         }
     }
 
@@ -92,7 +97,10 @@ class Options extends Controller {
 
         foreach ($styles as $style) {
 
-            WP_Register::add('style',  App::assets('css', $style));
+            WP_Register::add(
+                'style',  
+                App::EliasisWordPress('assets', 'css', $style)
+            );
         }
     }
 
@@ -102,6 +110,8 @@ class Options extends Controller {
      * @since 1.0.0
      */
     public function getSettings() { 
+
+        App::id(EliasisWordPress);
 
         App::addOption('data', $this->model->getSettings());
     }
@@ -128,7 +138,7 @@ class Options extends Controller {
      */
     public function example() {
 
-        print(App::data('eliasis'));
+        print(App::EliasisWordPress('data', 'eliasis'));
     }
     
     /**
@@ -138,8 +148,8 @@ class Options extends Controller {
      */
     public function render() {
 
-        App::id(ELIASIS_WP);
-
-        $this->view->renderizate(App::path('layout') . 'default');
+        $this->view->renderizate(
+            App::EliasisWordPress('path', 'layout') . 'default'
+        );
     }
 }

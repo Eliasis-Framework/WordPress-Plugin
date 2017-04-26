@@ -29,7 +29,7 @@ class Uninstall {
      */
     public static function removeAll() {
 
-        $pluginName = App::plugin('name');
+        $pluginName = App::EliasisWordPress('plugin', 'name');
 
         delete_option($pluginName .'version');
         // For site options in Multisite

@@ -32,7 +32,9 @@ require 'lib' . $DS . 'vendor' . $DS .'autoload.php';
 
 App::run(__DIR__, 'wordpress-plugin', ELIASIS_WP);
 
-$method = App::namespace('controller') . 'Launcher::getInstance';
+$namespace = App::EliasisWordPress('namespace', 'controller');
+
+$method = $namespace . 'Launcher::getInstance';
 
 $Launcher = call_user_func($method);
 

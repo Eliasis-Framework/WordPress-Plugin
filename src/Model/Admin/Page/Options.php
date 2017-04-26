@@ -24,7 +24,11 @@ class Options extends Model {
 
 	protected function __construct() {
 
-		$this->filepath = App::path('json') . App::file('settings');
+        $jsonPath = App::EliasisWordPress('path', 'json');
+
+        $jsonFile = App::EliasisWordPress('file', 'settings');
+
+		$this->filepath = $jsonPath . $jsonFile;
 	}
 
     /** 
