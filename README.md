@@ -62,20 +62,20 @@ App::run(dirname(__DIR__), 'wordpress-plugin', 'unique_id');
 
 # Plugin one
 
-App::run(dirname(__DIR__), 'wordpress-plugin', 'plugin-one-id');
+App::run(dirname(__DIR__), 'wordpress-plugin', 'pluginOneId');
 
 function getPublicPath() {
 	
-	App::plugin-one-id('path', 'public');
+	App::pluginOneId('path', 'public');
 }
 
 # Plugin two
 
-App::run(dirname(__DIR__), 'wordpress-plugin', 'plugin-two-id');
+App::run(dirname(__DIR__), 'wordpress-plugin', 'pluginTwoId');
 
 function getPublicPath() {
 	
-	App::plugin-two-id('path', 'public');
+	App::pluginTwoId('path', 'public');
 }
 ```
 
