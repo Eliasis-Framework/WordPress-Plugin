@@ -6,16 +6,13 @@
  * @copyright  Copyright (c) 2017
  * @license    GPL-2.0+
  * @link       https://github.com/Eliasis-Framework/WordPress-Plugin.git
- * @since      1.0.0
+ * @since      1.0.3
  */
 
 return [
 
-	'plugin' => [
-
-		'name' 				  => dirname(dirname(plugin_basename( __FILE__))),
-	    'version'	  		  => '1.0.0',
-	    'minimum_wp_version'  => '3.8',
-	    'minimum_php_version' => '5.3',
-	],
+	'slug' 				  => dirname(dirname(plugin_basename( __FILE__))),
+    'version'	  		  => '1.0.3',
+    'minimum_wp_version'  => '3.8',
+    'minimum_php_version' => '5.3',
 ];

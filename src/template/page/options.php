@@ -25,7 +25,7 @@ Hello World, HTML + CSS
       <div class="crater2"></div>
       <div class="crater3"></div>
       <div class="eliasis">
-         <?php Hook::run('example') ?>
+         <?php Hook::doAction('example') ?>
       </div>
       <div class="eliasis-subtitle">
          <?= __('PHP Framework', 'eliasis-wordpress-plugin') ?>

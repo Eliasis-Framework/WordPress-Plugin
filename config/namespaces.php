@@ -9,11 +9,13 @@
  * @since      1.0.0
  */
 
+$pluginName = 'EliasisWordPress';
+
 return [
 
-    'namespace' => [
+    'namespaces' => [
 
-        'admin-page' => 'EliasisWordPress\\Controller\\Admin\\Page\\',
-        'controller' => 'EliasisWordPress\\Controller\\',
+        'admin-page' => $pluginName . '\\Controller\\Admin\\Page\\',
+        'controller' => $pluginName . '\\Controller\\',
     ],
 ];

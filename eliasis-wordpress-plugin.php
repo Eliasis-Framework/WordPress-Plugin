@@ -16,6 +16,8 @@
 
 use Eliasis\App\App;
 
+$DS = DIRECTORY_SEPARATOR;
+
 /** 
  * Don't expose information if this file called directly.
  */
@@ -24,23 +26,30 @@ if (!function_exists('add_action') || !defined('ABSPATH')) {
     echo 'I can do when called directly.'; die;
 }
 
-$DS = DIRECTORY_SEPARATOR;
-
-define('ELIASIS_WP', 'EliasisWordPress');
-
+/** 
+ * Classloader.
+ */
 require 'lib' . $DS . 'vendor' . $DS .'autoload.php';
 
-App::run(__DIR__, 'wordpress-plugin', ELIASIS_WP);
+/** 
+ * Start application.
+ */
+App::run(__DIR__, 'wordpress-plugin', 'EliasisWordPress');
 
-$namespace = App::EliasisWordPress('namespace', 'controller');
+/** 
+ * Get main instance.
+ */
+$Launcher = App::instance('Launcher', 'controller');
 
-$method = $namespace . 'Launcher::getInstance';
-
-$Launcher = call_user_func($method);
-
+/** 
+ * Register hooks.
+ */
 register_activation_hook(__FILE__, [$Launcher, 'activation']);
 
 register_deactivation_hook(__FILE__, [$Launcher, 'deactivation']);
-        
+
+/** 
+ * Launch application.
+ */
 $Launcher->init();
 ?>

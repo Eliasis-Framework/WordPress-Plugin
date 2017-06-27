@@ -6,11 +6,19 @@
  * @copyright  Copyright (c) 2017
  * @license    GPL-2.0+
  * @link       https://github.com/Eliasis-Framework/WordPress-Plugin.git
- * @since      1.0.0
+ * @since      1.0.3
  */
 
 use Eliasis\App\App;
 
-require(App::EliasisWordPress('path', 'elements') . 'header.php');
-require(App::EliasisWordPress('path', 'pages')    . 'options.php');
-require(App::EliasisWordPress('path', 'elements') . 'footer.php');
+$namespace = App::EliasisWordPress()->get('namespaces', 'admin-page');
+
+$Options = $namespace . 'Options\Options';
+
+return [
+
+    'hooks' => [
+
+        ['example', [$Options, 'example'], 8, 0],
+    ]
+];

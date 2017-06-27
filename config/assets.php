@@ -11,8 +11,8 @@
 
 use Eliasis\App\App;
 
-$css = App::EliasisWordPress('url', 'css');
-$js  = App::EliasisWordPress('url', 'js');
+$css = App::EliasisWordPress()->get('url', 'css');
+$js  = App::EliasisWordPress()->get('url', 'js');
 
 return [
 

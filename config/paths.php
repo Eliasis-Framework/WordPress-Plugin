@@ -18,10 +18,9 @@ return [
 
     'path' => [
 
-        'public'    => $ROOT.'public'   .$DS,
-        'json'      => $ROOT.'public'   .$DS.'json'    .$DS,
-        'layout'    => $ROOT.'src'      .$DS.'template'.$DS.'layout'  .$DS,
-        'pages'     => $ROOT.'src'      .$DS.'template'.$DS.'pages'   .$DS,
-        'elements'  => $ROOT.'src'      .$DS.'template'.$DS.'elements'.$DS,
+        'public'    => $ROOT.'public'.$DS,
+        'json'      => $ROOT.'public'.$DS.'json'    .$DS,
+        'layout'    => $ROOT.'src'   .$DS.'template'.$DS.'layout'  .$DS,
+        'page'      => $ROOT.'src'   .$DS.'template'.$DS.'page'   .$DS,
     ],
 ];

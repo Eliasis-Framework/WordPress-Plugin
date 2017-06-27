@@ -11,9 +11,7 @@
 
 use Eliasis\App\App;
 
-$textdomain = App::EliasisWordPress('plugin', 'name');
-
-$iconsUrl = App::EliasisWordPress('url', 'icons');
+$iconsUrl = App::EliasisWordPress()->get('url', 'icons');
 
 return [
 

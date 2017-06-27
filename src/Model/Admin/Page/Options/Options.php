@@ -9,7 +9,7 @@
  * @since      1.0.0
  */
 
-namespace EliasisWordPress\Model\Admin\Page;
+namespace EliasisWordPress\Model\Admin\Page\Options;
 
 use Eliasis\Model\Model,
 	Eliasis\App\App,
@@ -24,9 +24,9 @@ class Options extends Model {
 
 	protected function __construct() {
 
-        $jsonPath = App::EliasisWordPress('path', 'json');
+        $jsonPath = App::EliasisWordPress()->get('path', 'json');
 
-        $jsonFile = App::EliasisWordPress('file', 'settings');
+        $jsonFile = App::EliasisWordPress()->get('file', 'settings');
 
 		$this->filepath = $jsonPath . $jsonFile;
 	}

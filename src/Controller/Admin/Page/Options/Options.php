@@ -9,7 +9,7 @@
  * @since      1.0.0
  */
 
-namespace EliasisWordPress\Controller\Admin\Page;
+namespace EliasisWordPress\Controller\Admin\Page\Options;
 
 use Josantonius\WP_Register\WP_Register,
     Josantonius\WP_Menu\WP_Menu,
@@ -40,10 +40,21 @@ class Options extends Controller {
      */
     public function init() {
 
-        $this->addScripts();
-        $this->addStyles();
         $this->getSettings();
-        $this->addHooks();
+    }
+
+    /**
+     * Add menu and instance to associated method to display the page.
+     * 
+     * @since 1.0.0
+     */
+    public function setMenu() {
+
+        WP_Menu::add(
+            'menu', 
+            App::EliasisWordPress()->get('menu', 'top-level'), 
+            [$this, 'render']
+        );
     }
 
     /**
@@ -57,7 +68,7 @@ class Options extends Controller {
 
         WP_Menu::add(
             'submenu', 
-            App::EliasisWordPress('submenu', 'options'), 
+            App::EliasisWordPress()->get('submenu', 'options'), 
             [$this, 'render']
         );
     }
@@ -67,20 +78,12 @@ class Options extends Controller {
      *
      * @since 1.0.0
      */
-    protected function addScripts() {
+    public function addScripts() {
 
-        $scripts = [
-            'eliasisfront', 
-            'eliasisadmin',
-        ];
-
-        foreach ($scripts as $script) {
-
-            WP_Register::add(
-                'script', 
-                App::EliasisWordPress('assets', 'js', $script)
-            );
-        }
+        WP_Register::add(
+            'script', 
+            App::EliasisWordPress()->get('assets', 'js', 'eliasisadmin')
+        );
     }
 
     /**
@@ -88,20 +91,12 @@ class Options extends Controller {
      *
      * @since 1.0.0
      */
-    protected function addStyles() {
+    public function addStyles() {
 
-        $styles = [
-            'eliasisfront', 
-            'eliasisadmin',
-        ];
-
-        foreach ($styles as $style) {
-
-            WP_Register::add(
-                'style',  
-                App::EliasisWordPress('assets', 'css', $style)
-            );
-        }
+        WP_Register::add(
+            'style',  
+            App::EliasisWordPress()->get('assets', 'css', 'eliasisadmin')
+        );
     }
 
     /** 
@@ -111,22 +106,7 @@ class Options extends Controller {
      */
     public function getSettings() { 
 
-        App::id(EliasisWordPress);
-
-        App::addOption('data', $this->model->getSettings());
-    }
-
-    /**
-     * Add hooks.
-     *
-     * @since 1.0.0
-     */
-    public function addHooks() {
-
-        Hook::addHook([
-
-            'example' => __CLASS__ . '@example',
-        ]);
+        App::EliasisWordPress()->set('data', $this->model->getSettings());
     }
 
     /** 
@@ -138,7 +118,7 @@ class Options extends Controller {
      */
     public function example() {
 
-        print(App::EliasisWordPress('data', 'eliasis'));
+        print(App::EliasisWordPress()->get('data', 'eliasis'));
     }
     
     /**
@@ -148,8 +128,16 @@ class Options extends Controller {
      */
     public function render() {
 
-        $this->view->renderizate(
-            App::EliasisWordPress('path', 'layout') . 'default'
-        );
+        $page = App::EliasisWordPress()->get('path', 'page');
+
+        $layout = App::EliasisWordPress()->get('path', 'layout');
+
+        Hook::getInstance(App::$id);
+
+        $this->view->renderizate($layout, 'header');
+
+        $this->view->renderizate($page, 'options');
+
+        $this->view->renderizate($layout, 'footer');     
     }
 }
