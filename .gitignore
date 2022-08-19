@@ -16,3 +16,6 @@ search-inside.zip
 .svn-prop.tmp.swp
 svn-prop.tmp
 versions/
+.repository.md
+wordpress-plugin.code-workspace
+.vscode/

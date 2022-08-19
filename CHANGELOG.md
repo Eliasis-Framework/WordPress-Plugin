@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2022-08-19
+
+* The repository was archived.
+
 ## 1.0.3 - 2017-06-27
 
 * Eliasis Framework has been updated to version 1.1.0.
